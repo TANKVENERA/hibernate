@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="belski.ru.repository.model.UserInformation" table="T_USERINFORMATION">
+        <meta attribute="class-description">
+        </meta>
+        <id name="id" type="java.lang.Integer" >
+            <column name="F_ID"></column>
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
+        </id>
+        <one-to-one name="user" class="belski.ru.repository.model.User"
+        constrained="true"/>
+        <property name="address"  type="string">
+            <column name="F_ADDRESS" length="100" not-null="true" unique="true"/>
+        </property >
+
+    </class>
+</hibernate-mapping>

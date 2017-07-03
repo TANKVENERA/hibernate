@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="belski.ru.repository.model.Meetings" table="T_Meeting">
+        <meta attribute="class-description">
+        </meta>
+        <id name="id" type="java.lang.Integer" >
+            <column name="F_ID" ></column>
+            <generator class="increment"/>
+        </id>
+        <property name="meetingName"  type="string">
+            <column name="F_MEETINGNAME" length="50" not-null="true" unique="true"/>
+        </property >
+        <one-to-one name="room" class="belski.ru.repository.model.Room" cascade="save-update"/>
+        <set name="users" table="user_meeting" inverse="false" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="FK_Meeting" not-null="true"></column>
+            </key>
+            <many-to-many entity-name="belski.ru.repository.model.User">
+                <column name="FK_User" not-null="true"/>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
